@@ -32,27 +32,40 @@
             var form = document.getElementById('form');
             var email_validate = document.getElementById('email');
             var password_validate = document.getElementById('password');
+            var password_span = document.getElementById('password-span');
             // var text = document.getElementById('text').nodeValue;
             // var regx = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
             if(email_validate.value === '' || email_validate.value === null){
                 alert("no blank values allowed");
                 return false;   
             }
-            // if(regx.test(email_validate.value)){
-            //     alert(" You have provided valid email id ")
-            //     return false;
-            // }
+
             if(password_validate.value === '' || password_validate.value === null){
-                alert("no blank values allowed");
+                // alert("no blank values allowed");
+                password_span.innerHTML = "no blank values allowed"
                 return false;   
             }
             
             if(password_validate.value.length<=6){
-                alert('password must be longer than 6 charcters');
+                // alert('password must be longer than 6 charcters');
+                password_span.innerHTML = "password must be longer than 6 charcters"
                 return false;  
             }
             if(password_validate.value.length>=20){
-                alert('password must be less than 20 charcters');
+                // alert('password must be less than 20 charcters');
+                password_span.innerHTML = "password must be less than 20 charcters"
+                return false;
+            }
+            if(!password_validate.value.match(/[0-9]/)){
+                password_span.innerHTML = "password have at least a number"
+                return false;
+            }
+            if(!password_validate.value.match(/[A-Z]/)){
+                password_span.innerHTML = "password have at least a uppercase letter"
+                return false;
+            }
+            if(!password_validate.value.match(/[!\@\#\$\%\^\&\*|(\)\[\]\{\}]/)){
+                password_span.innerHTML = "password have at least a special case letter"
                 return false;
             }
             if(email_validate.value.match(pattern)){
@@ -68,6 +81,7 @@
         }
 
     </script>
+   
 </head>
 <body>
     <div id="error"></div>
@@ -75,20 +89,27 @@
 
     <form onsubmit=" return validate()" id="form" class="container" method="post" action="/" credentials: 'same-origin'>
         <div class="form-group">
-            <label for="email">email</label>
+        <label for="email">email</label>
         <input class="form-control" id="email" name="email" type="email" size="20" required>
+   
+        <br>
         </div>
-        <div class="form-group">
-            <label for="password">password</label>
 
+        <div class="form-group">
+        <label for="password">password</label>
         <input class="form-control" id="password" name="password" size="20" required>
         <button class="btn" type="submit" onclick="getPassword()">Genereate password</button>
-    </div><div class="form-group">
+        <br>
+        <span id ="password-span"></span>
+        </div>
+        
+        <div class="form-group">
         <label>confirm password</label>
-    <input class="form-control" id="confirmpassword" name="confirmpassword" size="20">
-</div>
-    <button type="submit">submit</button>
-    <a href="https://formsubmit.co/el/dutaye">To connect with me</a>
+        <input class="form-control" id="confirmpassword" name="confirmpassword" size="20">
+        </div> 
+          
+        <button type="submit">submit</button>
+        <a href="https://formsubmit.co/el/dutaye">To connect with me</a>
     </form>
 </body>
 </html>
