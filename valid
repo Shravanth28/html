@@ -33,6 +33,7 @@
             var email_validate = document.getElementById('email');
             var password_validate = document.getElementById('password');
             var password_span = document.getElementById('password-span');
+            var confirmpassword = document.getElementById('confirmpassword');
             // var text = document.getElementById('text').nodeValue;
             // var regx = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
             if(email_validate.value === '' || email_validate.value === null){
@@ -66,6 +67,10 @@
             }
             if(!password_validate.value.match(/[!\@\#\$\%\^\&\*|(\)\[\]\{\}]/)){
                 password_span.innerHTML = "password have at least a special case letter"
+                return false;
+            }
+            if(password_validate.value !== confirmpassword.value){
+                password_span.innerHTML = "passwords not matching"
                 return false;
             }
             if(email_validate.value.match(pattern)){
